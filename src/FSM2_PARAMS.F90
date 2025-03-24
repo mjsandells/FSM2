@@ -33,6 +33,7 @@ real :: &
   rcld,              &! Maximum density for cold snow (kg/m^3)
   rfix,              &! Fixed snow density (kg/m^3)
   rgr0,              &! Fresh snow grain radius (m)
+  rggb,              &! Base grain growth rate (m^2/s)
   rhof,              &! Fresh snow density (kg/m^3)
   rhow,              &! Wind-packed snow density (kg/m^3)
   rmlt,              &! Maximum density for melting snow (kg/m^3)
@@ -72,8 +73,8 @@ implicit none
 
 namelist /params/ acn0,acns,avg0,avgs,cvai,gsnf,hbas,kext,leaf,svai,   &
                   Tunl,Uunl,wcan,Pmlt,Tadd,                            &
-                  asmn,asmx,eta0,hfsn,kfix,nhyd,rcld,rfix,rgr0,rhof,   &
-                  rmlt,Salb,snda,Talb,tcld,tmlt,trho,Wirr,z0sn,        &
+                  asmn,asmx,eta0,hfsn,kfix,nhyd,rcld,rfix,rgr0,rggb,   &
+                  rhof,rmlt,Salb,snda,Talb,tcld,tmlt,trho,Wirr,z0sn,   &
                   fcly,fsnd,gsat,z0sf 
 
 ! Vegetation parameters
@@ -103,6 +104,7 @@ nhyd = 10             ! Number of snow hydrology substeps
 rcld = 300            ! Maximum density for cold snow (kg/m^3)
 rfix = 300            ! Fixed snow density (kg/m^3)
 rgr0 = 5e-5           ! Fresh snow grain radius (m)
+rggb = 1e-12          ! Base grain growth rate (m^2/s)
 rhof = 100            ! Fresh snow density (kg/m^3)
 rhow = 300            ! Wind-packed snow density (kg/m^3)
 rmlt = 500            ! Maximum density for melting snow (kg/m^3)

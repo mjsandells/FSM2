@@ -32,6 +32,7 @@ use PARAMETERS, only: &
   rcld,              &! Maximum density for cold snow (kg/m^3)
   rfix,              &! Fixed snow density (kg/m^3)
   rgr0,              &! Fresh snow grain radius (m)
+  rggb,              &! Base grain growth rate (m^2/s)
   rhof,              &! Fresh snow density (kg/m^3)
   rhow,              &! Wind-packed snow density (kg/m^3)
   rmlt,              &! Maximum density for melting snow (kg/m^3)
@@ -262,12 +263,12 @@ if (Nsnow > 0) then
 #elif SGRAIN == 1
   ! Temperature dependent snow grain growth
   do n = 1, Nsnow
-    ggr = 2e-13
+    ggr = 0.2*rggb
     if (Tsnow(n) < Tm) then
       if (Rgrn(n) < 1.50e-4) then
-        ggr = 2e-14
+        ggr = 0.02*rggb
       else
-        ggr = 7.3e-8*exp(-4600/Tsnow(n))
+        ggr = 7.3e4*rggb*exp(-4600/Tsnow(n))
       end if
     end if
     Rgrn(n) = Rgrn(n) + dt*ggr/Rgrn(n)
@@ -284,9 +285,9 @@ if (Nsnow > 0) then
     if (thetaw(n) < 1e-4) then
       dpdT = (e0/(Rwat*Tsnow(n)**2))*(Ls/(Rwat*Tsnow(n)) - 1)*exp((Ls/Rwat)*(1/Tm - 1/Tsnow(n)))
       qv = 9.2e-5*(Tsnow(n)/Tm)**6*dpdT*dTdz
-      ggr = 1.25e-7*min(qv, 1e-6)
+      ggr = 1.25e5*rggb*min(qv, 1e-6)
     else
-      ggr = 1e-12*min(thetaw(n) + 0.05, 0.14)
+      ggr = rggb*min(thetaw(n) + 0.05, 0.14)
     end if
     Rgrn(n) = Rgrn(n) + dt*ggr/Rgrn(n)
   end do

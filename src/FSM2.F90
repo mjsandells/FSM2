@@ -343,7 +343,7 @@ do
 #else
   call FSM2_OUTPUT(Npnts,year,month,day,hour,                          &
                    H,LE,LWout,LWsub,Melt,Roff,snd,snw,subl,svg,SWout,  &
-                   SWsub,Tsoil,Tsrf,Tsub,Tveg,Usub)
+                   SWsub,Tsoil,Tsrf,Tsub,Tveg,Usub,Rgrn)
 #endif
 end do
 1 continue
