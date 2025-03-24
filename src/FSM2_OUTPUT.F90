@@ -3,7 +3,7 @@
 !-----------------------------------------------------------------------
 subroutine FSM2_OUTPUT(Npnts,year,month,day,hour,                      &
                        H,LE,LWout,LWsub,Melt,Roff,snd,snw,subl,svg,    &
-                       SWout,SWsub,Tsoil,Tsrf,Tsub,Tveg,Usub)
+                       SWout,SWsub,Tsoil,Tsrf,Tsub,Tveg,Usub,Rgrn)
 
 #include "OPTS.h"
 
@@ -14,6 +14,7 @@ use IOUNITS, only: &
 
 use LAYERS, only: &
   Ncnpy,             &! Number of canopy layers
+  Nsmax,             &! Maximum number of snow layers
   Nsoil               ! Number of soil layers
 
 implicit none
@@ -39,6 +40,7 @@ real, intent(in) :: &
   SWout(Npnts),      &! Outgoing SW radiation (W/m^2)
   SWsub(Npnts),      &! Subcanopy downward SW radiation (W/m^2)
   Tsoil(Nsoil,Npnts),&! Soil layer temperatures (K)
+  Rgrn(Nsmax,Npnts), &! Snow layer grain radii (m)
   Tsrf(Npnts),       &! Snow/ground surface temperature (K)
   Tsub(Npnts),       &! Subcanopy air temperature (K)
   Tveg(Ncnpy,Npnts), &! Vegetation layer temperatures (K)
@@ -51,7 +53,7 @@ write(ucan,100) year,month,day,hour,LWsub,SWsub,Tsub,Usub
 write(uflx,100) year,month,day,hour,H,LE,LWout,Melt,Roff,subl,SWout
 
 ! State outputs
-write(usta,100) year,month,day,hour,snd,snw,svg,Tsoil,Tsrf,Tveg
+write(usta,100) year,month,day,hour,snd,snw,svg,Tsoil,Tsrf,Tveg,Rgrn
 
 100 format(3(i4),f8.3,*(e14.6))
 
