@@ -6,7 +6,8 @@
 # University of Edinburgh                                              #
 ########################################################################
 FC=gfortran             # compiler
-NDIR=/usr/include/      # NetCDF include path
+#NDIR=/usr/include/      # NetCDF include path
+NDIR=/Users/melodysandells/OneDrive/Projects/external_repos/brew/Cellar/netcdf-fortran/4.6.1_2/include
 
 cd src
 

@@ -21,5 +21,5 @@
 &initial
 /
 &outputs
-  runid = 'Alptal_'
+  runid = 'Alptal_new_s2_'
 /
